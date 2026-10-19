@@ -1,0 +1,3 @@
+trackthebill.com, www.trackthebill.com {
+    reverse_proxy go-api:8080
+}
