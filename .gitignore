@@ -1,0 +1,19 @@
+# Environment & Secret files
+.env
+.env.local
+*.env
+
+# Database local storage
+*.db
+*.sqlite
+pg_data/
+caddy_data/
+
+# OS / Editor clutter
+.DS_Store
+.idea/
+.vscode/
+
+# Binaries / Build outputs
+/api/server
+/bin/
