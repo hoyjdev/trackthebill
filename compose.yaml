@@ -10,11 +10,23 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
 
-  go-api:
+  api:
     build: ./api
     restart: unless-stopped
     expose:
-      - "8080"
+      - "8080:8080"
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - INTERNAL_API_URL=http://api:8080
+    depends_on:
+      - api
 
 volumes:
   caddy_data:

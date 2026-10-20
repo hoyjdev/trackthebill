@@ -1,3 +1,11 @@
 trackthebill.com, www.trackthebill.com {
-    reverse_proxy go-api:8080
+    # Direct route to API
+    handle /api/* {
+        reverse_proxy api:8080
+    }
+
+    # All other traffic to web app
+    handle {
+        reverse_proxy web:3000
+    }
 }
