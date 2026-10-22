@@ -38,4 +38,4 @@ jobs:
             SESSION_SECRET=${{ secrets.SESSION_SECRET }}
             EOF
 
-            docker compose up -d --build
+            docker compose up -d --build --remove-orphans
