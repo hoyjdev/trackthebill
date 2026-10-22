@@ -2,7 +2,7 @@ name: Deploy TrackTheBill
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   deploy:
@@ -33,4 +33,9 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /root/trackthebill
+
+            cat << 'EOF' > .env
+            SESSION_SECRET=${{ secrets.SESSION_SECRET }}
+            EOF
+
             docker compose up -d --build
