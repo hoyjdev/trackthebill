@@ -1,10 +1,11 @@
-import { Title } from '@solidjs/meta';
-import type { RouteDefinition } from '@solidjs/router';
-import { For, Show, createMemo } from 'solid-js';
+import { Title } from "@solidjs/meta";
+import type { RouteDefinition } from "@solidjs/router";
+import { For, Show, createMemo } from "solid-js";
 
-import Counter from '../components/Counter';
-import { getCurrentUser, getUsers, login, logout } from '../lib/users';
-import logo from '../logo.svg';
+import Counter from "../components/Counter";
+import { getCurrentUser, getUsers, login, logout } from "../lib/users";
+import logo from "../logo.svg";
+import { getHelloWorld } from "../lib/helloWorld";
 
 // The preload starts these fetches as navigation begins — and it doubles as
 // the page's single-flight manifest: after a mutation, the server reruns it
@@ -13,6 +14,7 @@ export const route = {
   preload: () => {
     void getCurrentUser();
     void getUsers();
+    void getHelloWorld();
   },
 } satisfies RouteDefinition;
 
@@ -21,12 +23,16 @@ export default function Home() {
   // (see src/server/session.ts); the user list feeds the sign-in form.
   const me = createMemo(() => getCurrentUser());
   const users = createMemo(() => getUsers());
+  const hello = createMemo(() => getHelloWorld());
 
   return (
     <main>
       <Title>Home - Solid App</Title>
       <img src={logo} class="logo" alt="Solid logo" />
       <h1>Hello Solid!</h1>
+      <p>
+        From API: <strong>{hello()}</strong>
+      </p>
       <Counter />
       <p>
         Edit <code>src/routes/index.tsx</code> and save to reload.
@@ -41,7 +47,7 @@ export default function Home() {
               <For each={users()}>
                 {(user) => <option value={user.id}>{user.name}</option>}
               </For>
-            </select>{' '}
+            </select>{" "}
             <button type="submit">Sign in</button>
           </form>
         }

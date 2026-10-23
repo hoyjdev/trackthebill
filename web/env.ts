@@ -1,4 +1,4 @@
-import * as v from 'valibot';
+import * as v from "valibot";
 
 // The typed env schema (probed by the plugin from the project root): plain
 // objects of Standard Schema validators — valibot here, but zod, arktype, or
@@ -15,8 +15,9 @@ export default {
     // Comma-separated, newest first — see src/server/session.ts for the
     // rotation story. Generate one: `openssl rand -base64 32`.
     SESSION_SECRET: v.pipe(v.string(), v.minLength(32)),
+    INTERNAL_API_URL: v.optional(v.string(), "http://localhost:8080"),
   },
   client: {
-    VITE_APP_NAME: v.optional(v.pipe(v.string(), v.minLength(1)), 'Solid App'),
+    VITE_APP_NAME: v.optional(v.pipe(v.string(), v.minLength(1)), "Solid App"),
   },
 };
