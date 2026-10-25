@@ -1,7 +1,7 @@
-FROM golang:1.24-alpine AS builder
+FROM golang:1.26-alpine AS builder
 WORKDIR /app
-COPY main.go .
-RUN go build -o server main.go
+COPY . .
+RUN go build -o server .
 
 FROM alpine:latest
 WORKDIR /app
