@@ -36,6 +36,7 @@ jobs:
 
             cat << 'EOF' > .env
             SESSION_SECRET=${{ secrets.SESSION_SECRET }}
+            OPENSTATES_API_KEY=${{ secrets.OPENSTATES_API_KEY }}
             EOF
 
             docker compose up -d --build --remove-orphans
