@@ -1,12 +1,8 @@
 import { Title } from "@solidjs/meta";
 import type { RouteDefinition } from "@solidjs/router";
-import { For, Show, createMemo } from "solid-js";
+import { For, createMemo } from "solid-js";
 
-import Counter from "../components/Counter";
 import { getBills } from "../lib/bills";
-import { getHelloWorld } from "../lib/helloWorld";
-import { getCurrentUser, getUsers, login, logout } from "../lib/users";
-import logo from "../logo.svg";
 
 export const route = {
   preload: () => {
