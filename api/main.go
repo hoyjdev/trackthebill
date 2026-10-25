@@ -27,10 +27,6 @@ func main() {
 	client := &http.Client{Timeout: 10 * time.Second}
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "Hello World from TrackTheBill.com on Hetzner!")
-	})
-
 	mux.HandleFunc("GET /bills", func(w http.ResponseWriter, r *http.Request) {
 		req, err := http.NewRequestWithContext(
 			r.Context(),
