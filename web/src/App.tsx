@@ -1,8 +1,8 @@
 import { Title } from "@solidjs/meta";
-import { Loading } from "solid-js";
+import { Errored, Loading } from "solid-js";
 // Typed client env, validated and baked in at build time (see env.ts).
 import { env } from "virtual:env/client";
-import { paths, Router } from "./router";
+import { Router } from "./router";
 import "./App.css";
 
 export default function App() {
@@ -11,12 +11,16 @@ export default function App() {
       {(props) => (
         <>
           <Title>{env.VITE_APP_NAME}</Title>
-          <nav class="site-nav">
-            <a href={paths()}>Home</a>
-            <a href={paths.about()}>About</a>
-            <a href={paths.users()}>Users</a>
-          </nav>
-          <Loading fallback={<main>Loading…</main>}>{props.children}</Loading>
+          <Errored
+            fallback={(err, reset) => (
+              <main>
+                <p>Something went wrong: {String(err)}</p>
+                <button onClick={reset}>Try again</button>
+              </main>
+            )}
+          >
+            <Loading fallback={<main>Loading…</main>}>{props.children}</Loading>
+          </Errored>
         </>
       )}
     </Router>
